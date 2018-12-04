@@ -14,23 +14,31 @@ export class SmartAudioProvider {
     }
   }
 
-  preload(key, asset){
+  preloadComplex(id, asset, volume, voices, delay, imagem){
     if(this.audioType === 'html5'){
 
       let audio = {
-        key: key,
+        id: id,
+        imagem: imagem,
         asset: asset,
+        volume: volume,
+        voices: voices,
+        delay: delay,
         type: 'html5'
     };
 
     this.sounds.push(audio);
 
     }else{
-      this.nativeAudio.preloadComplex(key, asset, 0.5, 1, 0);
+      this.nativeAudio.preloadComplex(id, asset, 0.5, 1, 0);
+      this.nativeAudio.stop(id);
  
       let audio = {
-          key: key,
-          asset: key,
+          id: id,
+          asset: asset,
+          volume,
+          voices,
+          delay,
           type: 'native'
       };
 
@@ -38,21 +46,40 @@ export class SmartAudioProvider {
     }
   }
 
-  play(key){
+  play(id){
     let audio = this.sounds.find((sound) => {
-      return sound.key === key;
+      return sound.id === id;
     });
 
     if(audio.type === 'html5'){
       let audioAsset = new Audio(audio.asset);
             audioAsset.play();
     }else{
-        this.nativeAudio.play(audio.asset).then((res) => {
+        this.nativeAudio.play(audio.id).then((res) => {
           console.log(res);
-      }, (err) => {
+          }, (err) => {
           console.log(err);
-      });
+          });
 
     }
   }
+
+  pause(id){
+    let audio = this.sounds.find((sound) => {
+      return sound.id === id;
+    });
+
+    if(audio.type === 'html5'){
+      let audioAsset = new Audio(audio.asset);
+            audioAsset.pause();
+    }else{
+      this.nativeAudio.stop(audio.id).then((res) => {
+        console.log(res);
+        }, (err) => {
+        console.log(err);
+        });
+
+    }
+  }
+
 }

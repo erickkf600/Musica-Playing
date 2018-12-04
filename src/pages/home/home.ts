@@ -7,13 +7,18 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(public smartAudio: SmartAudioProvider) {
-
+  constructor(public _smartAudio: SmartAudioProvider) {
+    _smartAudio.preloadComplex(
+      'playbtn',
+      '../assets/music/Disenchanted My Chemical Romance.mp3',
+      0.5,
+      1,
+      0
+    );
   }
 
-  iniciar() {
-    this.smartAudio.play('playbtn');
-}
+  play(){
+    this._smartAudio.play('playbtn')
+  }
 
 }

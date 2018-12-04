@@ -1,18 +1,40 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color=warning>
+    <ion-title color="dark">ACCIO PLAYER</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Disenchanted</h2>
-  <p>
-    My Chemical Romance
-  </p>
-  <button id="botao" clear ion-button (click)="iniciar()">  
-    <ion-icon name="play"></ion-icon>
-  </button>
-  <button id="botao" clear ion-button  (click)="pausar()">  
-    <ion-icon name="pause"></ion-icon>
-  </button>
+<ion-content padding id="body" >
+  <ion-list (click)="play()">
+    <ion-item id="list">
+      <ion-avatar item-start>
+        <img src="">
+      </ion-avatar>
+      <h2 id="title">Disenchanted</h2>
+      <p id="sub-titulo">Disenchanted . 00:00</p>
+      <ion-icon name="play" item-end id="title"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-item id="player">
+    <img src="" id="img">
+    <span item-end id="icones">
+      <button id="botao"  clear ion-button>
+        <ion-icon name="skip-backward"></ion-icon>
+      </button>
+
+      <button id="botao" clear ion-button (click)="play()">
+        <ion-icon name="play"></ion-icon>
+      </button>
+      <button id="botao" clear ion-button >
+        <ion-icon name="pause"></ion-icon>
+      </button>
+
+      <button id="botao" clear ion-button (click)="nextTrack()">
+        <ion-icon name="skip-forward"></ion-icon>
+      </button>
+    </span>
+  </ion-item>
+</ion-footer>
