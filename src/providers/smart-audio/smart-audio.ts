@@ -14,12 +14,11 @@ export class SmartAudioProvider {
     }
   }
 
-  preloadComplex(id, asset, volume, voices, delay, imagem){
+  preloadComplex(id, asset, volume, voices, delay){
     if(this.audioType === 'html5'){
 
       let audio = {
         id: id,
-        imagem: imagem,
         asset: asset,
         volume: volume,
         voices: voices,
@@ -28,6 +27,7 @@ export class SmartAudioProvider {
     };
 
     this.sounds.push(audio);
+    this.nativeAudio.stop(id);
 
     }else{
       this.nativeAudio.preloadComplex(id, asset, 0.5, 1, 0);
